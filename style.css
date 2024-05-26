@@ -36,12 +36,43 @@ body {
   
   #task-list {
     margin: 0 auto; /* Centers list horizontally */
-    padding: 0;
+    padding: 10%;
     list-style: none; /* Removes default bullet points */
+    background-color: #4CAF50;
+    color: #ddd;
   }
   
   #task-list li {
-    border-bottom: 1px solid #ddd;
-    padding: 10px;
+    border-bottom: 3px solid #ddd;
+    padding: 10%;
+    font-size: 32px;
+    display: flex;
+    align-items: center;
   }
   
+  #completeButton {
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    text-align: center;
+    font-family: segoe UI;
+    color: #4CAF50;
+  }
+
+  #removeButton {
+    padding: 10px;
+    margin: 10px;
+    display:inline-block;
+    text-align: center;
+    font-family: segoe UI;
+    color: red;
+  }
+
+  #points {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    flex-grow: 1;
+    margin-right: 20%;
+  }
