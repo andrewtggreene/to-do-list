@@ -1,0 +1,47 @@
+body {
+    font-family: sans-serif;
+    margin: 0;
+    background-color: #f0f0f0;
+  }
+  
+  h1, h2 {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  #todo-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20%;
+  }
+  
+  #new-task {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    flex-grow: 1; /* Expands input to fill most of container */
+    margin-right: 20%;
+  }
+  
+  #add-task {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  #task-list {
+    margin: 0 auto; /* Centers list horizontally */
+    padding: 0;
+    list-style: none; /* Removes default bullet points */
+  }
+  
+  #task-list li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+  }
+  
