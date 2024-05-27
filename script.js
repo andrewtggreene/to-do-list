@@ -22,6 +22,17 @@ function addNewTask() {
       points += Number(newTaskPoint);
       pointTracker.textContent = 'Points: ' + points.toString();
       newTaskItem.classList.toggle('completed');
+      var c = document.createDocumentFragment();
+      for (var i = 0; i < 100; i++){
+        var styles = 'transform: translate3d(' + (random(500)-250) + 'px, ' + (random(200) - 150) + 'px, 0) rotate(' + random(360) + 'deg);\
+        background: hsla(' + random(360) + ', 100%, 50%, 1);\
+        animation: bang 700ms ease-out forwards;\
+        opacity: 0';
+        var e = document.createElement("i");
+        e.style.cssText = styles.toString();
+        c.appendChild(e);
+      }
+      completeButton.append(c);
     });
 
     // Create a button to remove the task
@@ -30,7 +41,21 @@ function addNewTask() {
     removeButton.textContent = 'Delete';
     removeButton.classList.add('remove-btn');
     removeButton.addEventListener('click', function() {
-      taskList.removeChild(newTaskItem);
+      var c = document.createDocumentFragment();
+      for (var i = 0; i < 100; i++){
+        var styles = 'transform: translate3d(' + (random(500)-250) + 'px, ' + (random(200) - 150) + 'px, 0) rotate(' + random(360) + 'deg);\
+        background: hsla(' + random(360) + ', 100%, 50%, 1);\
+        animation: bang 700ms ease-out forwards;\
+        opacity: 0';
+        var e = document.createElement("i");
+        e.style.cssText = styles.toString();
+        c.appendChild(e);
+      }
+      removeButton.append(c);
+      function removeButtons(){
+        taskList.removeChild(newTaskItem);
+      }
+      setTimeout(removeButtons, 500);
     });
 
     // Add buttons and new task content to the list item
@@ -46,3 +71,7 @@ function addNewTask() {
 
 // Add click event listener to the "Add Task" button
 addTaskButton.addEventListener('click', addNewTask);
+
+function random(max){
+  return Math.random() * (max -0) + 0;
+}
