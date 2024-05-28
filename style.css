@@ -13,7 +13,24 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 20%;
+    margin: 10%;
+  }
+
+  #priority {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-right: 3%;
+    font-family: sans-serif;
+  }
+
+  #priority1 {
+    padding: 10px;
+    border: none;
+    font-size: 16px;
+    margin-right: 1%;
+    font-family: sans-serif;
   }
   
   #new-task {
@@ -22,7 +39,7 @@ body {
     border-radius: 5px;
     font-size: 16px;
     flex-grow: 1; /* Expands input to fill most of container */
-    margin-right: 20%;
+    margin-right: 5%;
   }
   
   #add-task {
@@ -74,7 +91,7 @@ body {
     border-radius: 5px;
     font-size: 16px;
     flex-grow: 1;
-    margin-right: 20%;
+    margin-right: 10%;
   }
 
   @keyframes bang {
