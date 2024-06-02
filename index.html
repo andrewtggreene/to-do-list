@@ -3,27 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do List</title>
+  <title>To-Do List with Progress</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>To-Do List</h1>
-  <h2 id="pointTracker">Points: 0</h2>
-    <div id="todo-form">
-      <input type="text" id="new-task" placeholder="Enter new task">
-      <input type="number" id="points" placeholder="Points worth">
-      <label for="priority" id="priority1">Priority:</label>
-      <select id="priority" name="priority">
-        <option value="High">High</option>
-        <option value="Medium">Medium</option>
-        <option value = "Low">Low</option>
-      </select>
-      <button type="button" id="add-task">Add</button>
-    </div>
-  <h2>Task List</h2>
-  <ul id="task-list">
-  
-  </ul>
-  <script src="script.js"></script>  
+  <form id="todo-form">
+    <input type="text" id="new-task" placeholder="Add a new task">
+    <button type="submit">Add Task</button>
+  </form>
+  <ul id="task-list"></ul>
+  <script src="script.js"></script>
 </body>
 </html>
+

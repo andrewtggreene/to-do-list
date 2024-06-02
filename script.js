@@ -1,167 +1,71 @@
-const newTaskInput = document.getElementById('new-task');
-const addTaskButton = document.getElementById('add-task');
 const taskList = document.getElementById('task-list');
-const taskPoints = document.getElementById('points');
-const pointTracker = document.getElementById('pointTracker');
-const priority = document.getElementById('priority');
-var points = 0;
+const todoForm = document.getElementById('todo-form');
+const newTaskInput = document.getElementById('new-task');
 
-// Function to add a new task to the list
-function addNewTask() {
-  const newTaskValue = newTaskInput.value.trim(); // Trim whitespace
-  const newTaskPoint = taskPoints.value.trim();
-  const newPriority = priority.value;
-  if (newTaskValue && taskPoints) {
-    const newTaskItem = document.createElement('li');
-    newTaskItem.id = 'task-list li';
-    newTaskItem.className = "TaskId"
-    newTaskItem.textContent = newTaskValue + ': ' + newTaskPoint + ' Priority: ' + newPriority;
-    // Create a button to mark task as complete
-    const completeButton = document.createElement('button');
-    completeButton.id = 'completeButton';
-    completeButton.textContent = 'Complete';
-    completeButton.classList.add('complete-btn');
-    completeButton.addEventListener('click', function() {
-      points += Number(newTaskPoint);
-      pointTracker.textContent = 'Points: ' + points.toString();
-      newTaskItem.classList.toggle('completed');
-      var c = document.createDocumentFragment();
-      for (var i = 0; i < 100; i++){
-        var styles = 'transform: translate3d(' + (random(500)-250) + 'px, ' + (random(200) - 150) + 'px, 0) rotate(' + random(360) + 'deg);\
-        background: hsla(' + random(360) + ', 100%, 50%, 1);\
-        animation: bang 700ms ease-out forwards;\
-        opacity: 0';
-        var e = document.createElement("i");
-        e.style.cssText = styles.toString();
-        c.appendChild(e);
-      }
-      completeButton.append(c);
-    });
+// Function to create a new task list item
+function createTaskItem(task) {
+  const listItem = document.createElement('li');
+  const taskText = document.createElement('span');
+  taskText.classList.add('task-text');
+  taskText.textContent = task.text;
+  
+  const progressBar = document.createElement('progress');
+  progressBar.value = task.progress;
+  progressBar.max = 100;
 
-    // Create a button to remove the task
-    const removeButton = document.createElement('button');
-    removeButton.id = 'removeButton';
-    removeButton.textContent = 'Delete';
-    removeButton.classList.add('remove-btn');
-    removeButton.addEventListener('click', function() {
-      var c = document.createDocumentFragment();
-      for (var i = 0; i < 100; i++){
-        var styles = 'transform: translate3d(' + (random(500)-250) + 'px, ' + (random(200) - 150) + 'px, 0) rotate(' + random(360) + 'deg);\
-        background: hsla(' + random(360) + ', 100%, 50%, 1);\
-        animation: bang 700ms ease-out forwards;\
-        opacity: 0';
-        var e = document.createElement("i");
-        e.style.cssText = styles.toString();
-        c.appendChild(e);
-      }
-      removeButton.append(c);
-      function removeButtons(){
-        taskList.removeChild(newTaskItem);
-      }
-      setTimeout(removeButtons, 500);
-    });
+  const updateButton = document.createElement('button');
+  updateButton.classList.add('update-progress');
+  updateButton.textContent = 'Update';
 
-    // Add buttons and new task content to the list item
-    newTaskItem.appendChild(completeButton);
-    newTaskItem.appendChild(removeButton);
-    taskList.appendChild(newTaskItem);
+  listItem.appendChild(taskText);
+  listItem.appendChild(progressBar);
+  listItem.appendChild(updateButton);
 
-    // Clear the input field after adding the task
-    newTaskInput.value = '';
-    taskPoints.value = '';
-  }
-  const taskListArray = [...taskList.children].map(item => ({
-    text:item.textContent,
-    completed: item.classList.contains('completed')
-  }))
-  localStorage.setItem('toDoList', JSON.stringify(taskListArray))
+  // Optional: Add event listener for update button (implementation details omitted)
+  updateButton.addEventListener('click', () => {
+    // Update progress value based on user interaction here
+  });
+
+  return listItem;
 }
 
-// Add click event listener to the "Add Task" button
-addTaskButton.addEventListener('click', addNewTask);
-
-function random(max){
-  return Math.random() * (max -0) + 0;
-}
-
-window.addEventListener('load', () => {
+// Function to load tasks from local storage (if available)
+function loadTasks() {
   const storedTasks = localStorage.getItem('toDoList');
   if (storedTasks) {
     const tasks = JSON.parse(storedTasks);
     tasks.forEach(task => {
-      const newTaskItem = document.createElement('li');
-      newTaskItem.textContent = task.text;
-      newTaskItem.classList.add('completed');
-      const completeButton = document.createElement('button');
-      completeButton.id = 'completeButton';
-      completeButton.textContent = 'Completed';
-      completeButton.classList.add('complete-btn');
-      newTaskItem.appendChild(completeButton);
-      completeButton.addEventListener('click', function() {
-        points += Number(newTaskPoint);
-        pointTracker.textContent = 'Points: ' + points.toString();
-        newTaskItem.classList.toggle('completed');
-        var c = document.createDocumentFragment();
-        for (var i = 0; i < 100; i++){
-          var styles = 'transform: translate3d(' + (random(500)-250) + 'px, ' + (random(200) - 150) + 'px, 0) rotate(' + random(360) + 'deg);\
-          background: hsla(' + random(360) + ', 100%, 50%, 1);\
-          animation: bang 700ms ease-out forwards;\
-          opacity: 0';
-          var e = document.createElement("i");
-          e.style.cssText = styles.toString();
-          c.appendChild(e);
-        }
-        completeButton.append(c);
-      });
-  
-      
-      const removeButton = document.createElement('button');
-      removeButton.textContent = 'Delete';
-      removeButton.classList.add('remove-btn');
-      removeButton.id = 'removeButton';
-      newTaskItem.appendChild(removeButton);
-      taskList.appendChild(newTaskItem);
-      removeButton.addEventListener('click', function() {
-        var c = document.createDocumentFragment();
-        for (var i = 0; i < 100; i++){
-          var styles = 'transform: translate3d(' + (random(500)-250) + 'px, ' + (random(200) - 150) + 'px, 0) rotate(' + random(360) + 'deg);\
-          background: hsla(' + random(360) + ', 100%, 50%, 1);\
-          animation: bang 700ms ease-out forwards;\
-          opacity: 0';
-          var e = document.createElement("i");
-          e.style.cssText = styles.toString();
-          c.appendChild(e);
-        }
-        removeButton.append(c);
-        function removeButtons(){
-          taskList.removeChild(newTaskItem);
-        }
-        setTimeout(removeButtons, 500);
-      });
+      taskList.appendChild(createTaskItem(task));
     });
   }
-});
-function removeTask(taskItem) {
-  // Get the task list from local storage
-  const tasks = JSON.parse(localStorage.getItem('toDoList'));
-  
-  // Find the index of the task to be deleted
-  const taskIndex = tasks.findIndex(task => task.text === taskItem.textContent);
-  
-  // Mark the task as deleted (avoid actual deletion)
-  tasks[taskIndex].deleted = true;
-  
-  // Update local storage with the filtered task list
-  localStorage.setItem('toDoList', JSON.stringify(tasks));
-  
-  // Re-render the task list (filtering out deleted tasks)
-  taskList.innerHTML = ''; // Clear existing list items
-  tasks.forEach(task => {
-    if (!task.deleted) { // Only display non-deleted tasks
-      const newItem = document.createElement('li');
-      newItem.textContent = task.text;
-      // ... add logic for buttons and functionality for non-deleted tasks
-      taskList.appendChild(newItem);
-    }
-  });
 }
+
+// Function to add a new task
+function addTask(taskText) {
+  const newTask = {
+    text: taskText,
+    progress: 0, // Initial progress set to 0
+  };
+  const taskItem = createTaskItem(newTask);
+  taskList.appendChild(taskItem);
+
+  // Update local storage with the new task list
+  const tasks = JSON.parse(localStorage.getItem('toDoList')) || [];
+  tasks.push(newTask);
+  localStorage.setItem('toDoList', JSON.stringify(tasks));
+
+  // Clear the input field
+  newTaskInput.value = '';
+}
+
+// Event listener for form submission
+todoForm.addEventListener('submit', (event) => {
+  event.preventDefault(); // Prevent default form submission behavior
+  const newTaskText = newTaskInput.value.trim();
+  if (newTaskText) {
+    addTask(newTaskText);
+  }
+});
+
+// Load tasks from local storage on page load
+loadTasks();
